@@ -1,0 +1,68 @@
+//https://www.codingninjas.com/codestudio/problems/intersection-of-linked-list_630457?topList=cracking-the-coding-interview-questions
+
+/****************************************************************
+ 
+    Following is the class structure of the Node class:
+
+        class Node
+        {
+        public:
+	        int data;
+	        Node *next;
+	        Node(int data)
+	        {
+		        this->data = data;
+		        this->next = NULL;
+	        }
+        };
+        
+        
+*****************************************************************/
+int getLength(Node* head){
+    int len = 0;
+    while(head!=NULL){
+        len++;
+        head = head->next;
+    }
+    return len;
+}
+
+Node *skip(Node *head,int count){
+    //count will always be less than length of the LL
+    
+    while(count>0){
+        head = head->next;
+        count--;
+    }
+    return head;
+}
+
+int findIntersection(Node *firstHead, Node *secondHead)
+{
+    //Write your code here
+    int firstLen = getLength(firstHead);
+    int secondLen = getLength(secondHead);
+    int skipNodes = abs(firstLen - secondLen);
+    Node *newFirst;
+    Node *newSecond;
+    if(firstLen>secondLen){
+        newFirst = skip(firstHead,skipNodes);
+        newSecond = secondHead;
+    }
+    else{
+        newSecond = skip(secondHead,skipNodes);
+        newFirst = firstHead;
+    }
+    
+    while(newFirst!=NULL || newSecond!=NULL){
+        if(newFirst==newSecond){
+            return newFirst->data;
+        }
+        newFirst = newFirst->next;
+        newSecond = newSecond->next;
+    }
+    return -1;
+    
+    
+    
+}
