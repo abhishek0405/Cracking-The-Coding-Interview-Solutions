@@ -1,0 +1,50 @@
+//https://www.codingninjas.com/codestudio/problems/search-in-rotated-sorted-array_630450?topList=cracking-the-coding-interview-questions
+
+/*
+
+
+[1,2,3,4,5] => [4,5,1,2,3]
+
+4 5 6 7	           mid>st
+	    1 2 3      mid<end
+0 1  2 3 4
+
+
+
+*/
+
+int search(int* arr, int n, int key) {
+    // Write your code here
+    int st,end,mid,ans;
+    st = 0;
+    end = n-1;
+    ans = -1;
+    while(st<=end){
+        
+        mid = (st+end)/2;
+        if(arr[mid]==key){
+            return mid;
+        }
+        //first segment
+        if(arr[mid]>=arr[st]){
+            if(key>=arr[st] && key<=arr[mid]){
+                end = mid-1;
+            }
+            else{
+                st = mid+1;
+            }
+        }
+        //second segment
+        else{
+            if(key>=arr[mid] && key<=arr[end]){
+                st = mid+1;
+            }
+            else{
+                end = mid-1;
+            }
+        }
+    }
+    
+    return -1;
+    
+}
