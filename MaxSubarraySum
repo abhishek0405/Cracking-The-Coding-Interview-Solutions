@@ -1,0 +1,23 @@
+//https://www.codingninjas.com/codestudio/problems/maximum-subarray-sum_630526?topList=cracking-the-coding-interview-questions
+long long maxSubarraySum(int arr[], int n)
+{
+    /*
+        Don't write main().
+        Don't read input, it is passed as function argument.    
+        No need to print anything.
+        Taking input and printing output is handled automatically.
+        
+        5 2 -10 30 
+    */
+    long long maxSum = 0;
+    long long currSum = 0;
+    int i;
+    for(i=0;i<n;i++){
+        currSum+=arr[i];
+        if(currSum<0){
+            currSum = 0;
+        }
+        maxSum = max(maxSum,currSum);
+    }
+    return maxSum;
+}
